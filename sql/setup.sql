@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE; 
 
-CREATE TABLE users(
+CREATE TABLE users (
     gh_username TEXT NOT NULL PRIMARY KEY,
-    gh_avatar TEXT NOT NULL,
-)
+    gh_avatar TEXT NOT NULL
+);
