@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE; 
-DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS posts CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE users (
     gh_username TEXT NOT NULL PRIMARY KEY,
@@ -11,4 +12,11 @@ CREATE TABLE posts (
     photo_url TEXT NOT NULL,
     caption TEXT NOT NULL,
     username TEXT REFERENCES users(gh_username)
+);
+
+CREATE TABLE comments (
+    comment_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    comment TEXT NOT NULL,
+    post BIGINT NOT NULL REFERENCES posts(id),
+    comment_by TEXT NOT NULL REFERENCES users(gh_username)
 );
