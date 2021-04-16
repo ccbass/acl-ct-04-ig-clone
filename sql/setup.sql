@@ -10,5 +10,5 @@ CREATE TABLE posts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     photo_url TEXT NOT NULL,
     caption TEXT NOT NULL,
-    user TEXT REFERENCES users(gh_username)
-)
+    username TEXT REFERENCES users(gh_username)
+);
