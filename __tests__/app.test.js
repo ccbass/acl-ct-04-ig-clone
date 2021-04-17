@@ -185,29 +185,60 @@ describe('comments routes', () => {
   });
 
   it('adds a comment using POST', async () => {
-    await Comment.createcomment({
-
-    })
+    await User.createUser({
+      ghUsername: 'test',
+      ghAvatar: 'http://image.com/image.png',
+    });
+    await Post.createPost(
+      {
+        photo_url: 'http://dog.com',
+        caption: 'dog',
+        username: 'test'
+      });
+    
 
     return request(app)
       .post('/api/v1/comment')
+      .send({
+        comment: 'nice',
+        post: 1,
+        commentBy: 'test'
+      })
       .then((res) => {
         expect(res.body).toEqual({
-
+          comment: 'nice',
+          commentId: '1',
+          commentBy: 'test',
+          linkedPost: '1'
         })
       })
   })
 
   it('deletes comment', async () => {
-    await Comment.createcomment({
-
+    await User.createUser({
+      ghUsername: 'test',
+      ghAvatar: 'http://image.com/image.png',
+    });
+    await Post.createPost(
+      {
+        photo_url: 'http://dog.com',
+        caption: 'dog',
+        username: 'test'
+      });
+    await Comment.createComment(
+      {
+      comment: 'nice',
+      post: '1',
+      commentBy: 'test'
     })
-
     return request(app)
       .delete('/api/v1/comment/1')
       .then((res) => {
         expect(res.body).toEqual({
-
+          comment: 'nice',
+          commentId: '1',
+          commentBy: 'test',
+          linkedPost: '1'
         })
       })
   })
